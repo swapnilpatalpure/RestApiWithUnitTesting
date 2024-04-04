@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codewithswap.restapi.exception.CloudVendorNotFoundException;
 import com.codewithswap.restapi.model.CloudVendor;
 import com.codewithswap.restapi.repository.CloudVendorRepository;
 import com.codewithswap.restapi.service.CloudVendorService;
@@ -18,7 +19,8 @@ public class CloudVendorServiceImpl implements CloudVendorService{
 	@Override
 	public CloudVendor getCloudVendor(String cloudVendorId) {
 
-		CloudVendor cloudVendor = cloudVendorRepository.findById(cloudVendorId).get();
+		CloudVendor cloudVendor = cloudVendorRepository.findById(cloudVendorId)
+				.orElseThrow(()->new CloudVendorNotFoundException("Requested cloud vendor with id "+cloudVendorId+" is not exist"));
 		
 		return cloudVendor;
 	}
