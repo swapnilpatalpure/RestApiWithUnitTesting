@@ -13,9 +13,14 @@ import com.codewithswap.restapi.service.CloudVendorService;
 @Service
 public class CloudVendorServiceImpl implements CloudVendorService{
 	
-	@Autowired
+	
 	private CloudVendorRepository cloudVendorRepository;
 	
+	public CloudVendorServiceImpl(CloudVendorRepository cloudVendorRepository) {
+		super();
+		this.cloudVendorRepository = cloudVendorRepository;
+	}
+
 	@Override
 	public CloudVendor getCloudVendor(String cloudVendorId) {
 
